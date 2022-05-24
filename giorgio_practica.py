@@ -22,15 +22,20 @@ FPS = 60
 
 largo_jugador, alto_jugador = 40, 40
 jugador_imagen = pygame.draw.rect()
+def main():
+    run = True
 
-run = True
+    #CREAR VENTANA
+    ventana = pygame.display.set_mode(dimensiones)
+    pygame.display.set_caption("Laberinto del fauno")
 
-#CREAR VENTANA
-ventana = pygame.display.set_mode(dimensiones)
+    #PROGRAMA MAIN
+    while run == True:
 
-#PROGRAMA MAIN
-while run == True:
-    for event in pygame.event.get():
-        print(event)
-    if event.type == pygame.QUIT:
-        run = False
+        clock.tick(FPS)
+
+        for event in pygame.event.get():
+            print(event)
+            
+            if event.type == pygame.QUIT:
+            run = False
