@@ -7,6 +7,8 @@ clock=pygame.time.Clock()
 done=False
 
 imagen=pygame.image.load("labim.jpg")
+imagen = pygame.transform.scale(imagen, (800,600)
+                       
 while not done:
     for event in pygame.event.get():
        if event.type==pygame.QUIT:
