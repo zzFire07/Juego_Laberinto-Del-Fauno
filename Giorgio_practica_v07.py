@@ -20,7 +20,7 @@ def mov_imagenes(jugador): #Funcion para las imagenes en el juego
     pygame.display.update()
 
 def main():
-    jugador = pygame.Rect(500, 250, largo_jugador, alto_jugador)
+    jugador = pygame.Rect(400, 15, largo_jugador, alto_jugador)
 
     clock = pygame.time.Clock()
     run = True
@@ -29,8 +29,6 @@ def main():
     while run == True:
 
         clock.tick(FPS) #Se limitan los fotogramas a "FPS"
-        ventana.blit(imagen, (0,0))
-        ventana.blit(imagen_jugador, (jugador.x, jugador.y))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: #Se terminara el bucle si se cierra la ventana.
@@ -48,7 +46,7 @@ rojo = (255, 0, 0)
 azul = (0, 0, 255)
 
 #CONSTANTES
-vel = 4 #Velocidad del jugador
+vel = 2 #Velocidad del jugador
 FPS = 60 #Fotogramas por segundo que tendra el programa
 
 ancho, alto = 800, 600 #Dimensiones de la ventana del juego
@@ -59,8 +57,8 @@ pygame.display.set_caption("Laberinto del fauno") #NOMBRE DEL JUEGO
 imagen = pygame.image.load("laberinto.svg") #Cargamos la imagen que representara al jugador
 imagen = pygame.transform.scale(imagen, (ancho, alto))
 
-largo_jugador, alto_jugador = 40, 40 #Dimensiones del jugador
-imagen_jugador = pygame.transform.scale(pygame.image.load("stickman.jpg"), (largo_jugador, alto_jugador))
+largo_jugador, alto_jugador = 20, 20 #Dimensiones del jugador
+imagen_jugador = pygame.transform.scale(pygame.image.load("circ_rojo.png"), (largo_jugador, alto_jugador))
 
 
 main()
