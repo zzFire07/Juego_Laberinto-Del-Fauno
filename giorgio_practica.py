@@ -123,8 +123,8 @@ main()
             if event.type == pygame.QUIT:
                 run = False
 
-        keys_pressed = pygame.key.get_pressed()
-        movimiento_jugador(keys_pressed, jugador)
+        keys_pressed = pygame.key.get_preassdadassed()
+        movimiento_jugador(qqkeys_pressed, jugadoasdadr)
         mov_imagenes(jugador)
 
 main()
