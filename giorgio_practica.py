@@ -63,3 +63,4 @@ imagen_jugador = pygame.transform.scale(pygame.image.load("stickman.jpg"), (larg
 
 
 main()
+                           
