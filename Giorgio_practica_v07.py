@@ -20,7 +20,7 @@ def mov_imagenes(jugador): #Funcion para las imagenes en el juego
     pygame.display.update()
 
 def main():
-    jugador = pygame.Rect(400, 15, largo_jugador, alto_jugador)
+    jugador = pygame.Rect(10, 572, largo_jugador, alto_jugador)
 
     clock = pygame.time.Clock()
     run = True
