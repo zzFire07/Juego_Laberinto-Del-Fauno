@@ -1,6 +1,7 @@
 import pygame, os
 pygame.init()
 
+CONT_PASOS = 0
 
 def collide_DOWN(jugador):
     choque = False
@@ -15,7 +16,7 @@ def collide_UP(jugador):
     for i in range (1, largo_jugador):
         pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y))
         if pixeles_fondo == (0, 0, 0, 255):
-            choque = False
+            choque = True
     return choque
 
 def collide_RIGHT(jugador):
@@ -35,23 +36,24 @@ def collide_LEFT(jugador):
     return choque
 
 
-def movimiento_jugador(keys_pressed, jugador, PASOS): #Funcion para el movimiento del jugador
+def movimiento_jugador(keys_pressed, jugador): #Funcion para el movimiento del jugador
+    global CONT_PASOS
     if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT]: #SI SE APRETA A O FLECHA IZQUIERDA SE MUEVE 1 PIXELES HACÍA LA IZQUIERDA
         if collide_LEFT(jugador) == False:
             jugador.x -= vel
-            PASOS +=1
+            CONT_PASOS += 1
     if keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT]: #SI SE APRETA D O FLECHA DERECHA SE MUEVE 1 PIXELES HACÍA LA DERECHA
         if collide_RIGHT(jugador) == False:
             jugador.x += vel
-            PASOS += 1
+            CONT_PASOS += 1
     if keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]: #SI SE APRETA W O FLECHA SUPERIOR SE MUEVE 1 PIXELES HACÍA ARRIBA
         if collide_UP(jugador) == False:
             jugador.y -= vel
-            PASOS += 1
+            CONT_PASOS += 1
     if keys_pressed[pygame.K_s] or keys_pressed[pygame.K_DOWN]: #SI SE APRETA S O FLECHA INFERIOR SE MUEVE 1 PIXELES HACÍA ABAJO
         if collide_DOWN(jugador) == False:
             jugador.y += vel
-            PASOS += 1
+            CONT_PASOS += 1
 
 def mov_imagenes(jugador): #Funcion para las imagenes en el juego
     ventana.fill(blanco)
@@ -76,10 +78,10 @@ def main():
                 run = False
 
         keys_pressed = pygame.key.get_pressed()
-        movimiento_jugador(keys_pressed, jugador, PASOS)
+        movimiento_jugador(keys_pressed, jugador)
         mov_imagenes(jugador)
         collide_DOWN(jugador)
-        print(PASOS)
+        print(CONT_PASOS)
 
 #------------------------------------------------------------------------------#
 #COLORES
@@ -91,7 +93,6 @@ azul = (0, 0, 255)
 #CONSTANTES
 vel = 1 #Velocidad del jugador
 FPS = 60 #Fotogramas por segundo que tendra el programa
-PASOS = 0 #PASOS QUE DIO EL JUGADOR ANTES DE COMPLETAR EL JUEGO
 ancho, alto = 800, 600 #Dimensiones de la ventana del juego
 
 
