@@ -1,25 +1,19 @@
 import pygame, os, cv2
 pygame.init()
 
-
-
-img = cv2.imread("laberinto.svg")
-
-
-
 def movimiento_jugador(keys_pressed, jugador): #Funcion para el movimiento del jugador
-    if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT] and jugador.x > 5: #SI SE APRETA A O FLECHA IZQUIERDA SE MUEVE 4 PIXELES HACÍA LA IZQUIERDA
+    if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT] and jugador.x > 5: #SI SE APRETA A O FLECHA IZQUIERDA SE MUEVE 2 PIXELES HACÍA LA IZQUIERDA
         jugador.x -= vel
-    if keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT] and jugador.x + largo_jugador < ancho - 5: #SI SE APRETA D O FLECHA DERECHA SE MUEVE 4 PIXELES HACÍA LA DERECHA
+    if keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT] and jugador.x + largo_jugador < ancho - 5: #SI SE APRETA D O FLECHA DERECHA SE MUEVE 2 PIXELES HACÍA LA DERECHA
         jugador.x += vel
-    if keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP] and jugador.y > 5: #SI SE APRETA W O FLECHA SUPERIOR SE MUEVE 4 PIXELES HACÍA ARRIBA
+    if keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP] and jugador.y > 5: #SI SE APRETA W O FLECHA SUPERIOR SE MUEVE 2 PIXELES HACÍA ARRIBA
         jugador.y -= vel
-    if keys_pressed[pygame.K_s] or keys_pressed[pygame.K_DOWN] and jugador.y + alto_jugador < alto - 5: #SI SE APRETA S O FLECHA INFERIOR SE MUEVE 4 PIXELES HACÍA ABAJO
+    if keys_pressed[pygame.K_s] or keys_pressed[pygame.K_DOWN] and jugador.y + alto_jugador < alto - 5: #SI SE APRETA S O FLECHA INFERIOR SE MUEVE s PIXELES HACÍA ABAJO
         jugador.y += vel
 
 def mov_imagenes(jugador): #Funcion para las imagenes en el juego
     ventana.fill(blanco)
-    ventana.blit(imagen, (0, 0))
+    ventana.blit(fondo, (0, 0))
     ventana.blit(imagen_jugador, (jugador.x, jugador.y))
 
     pygame.display.update()
@@ -59,8 +53,9 @@ ventana = pygame.display.set_mode((ancho, alto))
 pygame.display.set_caption("Laberinto del fauno") #NOMBRE DEL JUEGO
 
 
-imagen = pygame.image.load("laberinto.svg") #Cargamos la imagen que representara al jugador
-imagen = pygame.transform.scale(imagen, (ancho, alto))
+fondo = pygame.image.load("laberinto.svg") #Cargamos la imagen que representara al jugador
+fondo = pygame.transform.scale(fondo, (ancho, alto))
+
 
 largo_jugador, alto_jugador = 20, 20 #Dimensiones del jugador
 imagen_jugador = pygame.transform.scale(pygame.image.load("circ_rojo.png"), (largo_jugador, alto_jugador))
