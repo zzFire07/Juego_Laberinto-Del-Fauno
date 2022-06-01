@@ -1,15 +1,53 @@
 import pygame, os, cv2
 pygame.init()
 
+
+def collide_DOWN(jugador):
+    choque = False
+    for i in range (0, largo_jugador+1):
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y + 20))
+        if pixeles_fondo == (0, 0, 0, 255):
+            choque = True
+    return choque
+
+def collide_UP(jugador):
+    choque = False
+    for i in range (0, largo_jugador+1):
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y))
+        if pixeles_fondo == (0, 0, 0, 255):
+            choque = True
+    return choque
+
+def collide_RIGHT(jugador):
+    choque = False
+    for i in range (0, largo_jugador+1):
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + 20, jugador.y + i))
+        if pixeles_fondo == (0, 0, 0, 255):
+            choque = True
+    return choque
+
+def collide_LEFT(jugador):
+    choque = False
+    for i in range (0, largo_jugador+1):
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x, jugador.y + i))
+        if pixeles_fondo == (0, 0, 0, 255):
+            choque = True
+    return choque
+
+
 def movimiento_jugador(keys_pressed, jugador): #Funcion para el movimiento del jugador
     if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT] and jugador.x > 5: #SI SE APRETA A O FLECHA IZQUIERDA SE MUEVE 2 PIXELES HACÍA LA IZQUIERDA
-        jugador.x -= vel
+        if collide_LEFT(jugador) == False:
+            jugador.x -= vel
     if keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT] and jugador.x + largo_jugador < ancho - 5: #SI SE APRETA D O FLECHA DERECHA SE MUEVE 2 PIXELES HACÍA LA DERECHA
-        jugador.x += vel
+        if collide_RIGHT(jugador) == False:
+            jugador.x += vel
     if keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP] and jugador.y > 5: #SI SE APRETA W O FLECHA SUPERIOR SE MUEVE 2 PIXELES HACÍA ARRIBA
-        jugador.y -= vel
+        if collide_UP(jugador) == False:
+            jugador.y -= vel
     if keys_pressed[pygame.K_s] or keys_pressed[pygame.K_DOWN] and jugador.y + alto_jugador < alto - 5: #SI SE APRETA S O FLECHA INFERIOR SE MUEVE s PIXELES HACÍA ABAJO
-        jugador.y += vel
+        if collide_DOWN(jugador) == False:
+            jugador.y += vel
 
 def mov_imagenes(jugador): #Funcion para las imagenes en el juego
     ventana.fill(blanco)
@@ -36,6 +74,7 @@ def main():
         keys_pressed = pygame.key.get_pressed()
         movimiento_jugador(keys_pressed, jugador)
         mov_imagenes(jugador)
+        collide_DOWN(jugador)
 
 #------------------------------------------------------------------------------#
 #COLORES
