@@ -9,7 +9,7 @@ def collide_DOWN(jugador):
     for i in range (1, largo_jugador):
         pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y + 20))
         if pixeles_fondo == (0, 0, 0, 255):
-            choque = True
+            choque = False
     return choque
 
 def collide_UP(jugador):
@@ -85,6 +85,9 @@ def main():
         mov_imagenes(jugador)
         collide_DOWN(jugador)
         print(CONT_PASOS)
+        if jugador.y > alto - alto_jugador - 4:
+            run = False
+
 
 #COLORES
 blanco = (255, 255, 255)
@@ -117,7 +120,7 @@ fondo = pygame.image.load("laberinto.svg") #Cargamos la imagen que representara 
 fondo = pygame.transform.rotate(pygame.transform.scale(fondo, (ancho, alto)), 180)
 
 largo_jugador, alto_jugador = 20, 20 #Dimensiones del jugador
-imagen_jugador = pygame.transform.scale(pygame.image.load("circulo.png"), (largo_jugador, alto_jugador))
+imagen_jugador = pygame.transform.scale(pygame.image.load("circ_rojo.png"), (largo_jugador, alto_jugador))
 
 main()
     
@@ -129,10 +132,9 @@ while True:
      ven.fill((255, 255, 255))  #color de fondo
      for event in pygame.event.get():
         if event.type==pygame.QUIT:
-        pygame.quit()
-        sys.exit()
-     texto=Fuente.render("¡YOU WIN!",0,(255,0,0))
-     ven.blit(texto,(230,230))
-     pygame.display.update()
-
+            pygame.quit()
+            sys.exit()
+        texto=Fuente.render("¡YOU WIN!",0,(255,0,0))
+        ven.blit(texto,(230,230))
+        pygame.display.update()
 
