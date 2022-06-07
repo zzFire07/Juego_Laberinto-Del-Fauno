@@ -119,22 +119,20 @@ fondo = pygame.transform.rotate(pygame.transform.scale(fondo, (ancho, alto)), 18
 largo_jugador, alto_jugador = 20, 20 #Dimensiones del jugador
 imagen_jugador = pygame.transform.scale(pygame.image.load("circulo.png"), (largo_jugador, alto_jugador))
 
-if main() == True:
-    main()
-else:
-# VENTANA FIN JUEGO
-    pygame.init()
-    ven= pygame.display.set_mode((800,600))
-    pygame.display.set_caption("Juego terminado")
-    Fuente= pygame.font.SysFont("Arial", 80)
-    while True:
-        ven.fill((255, 255, 255))  #color de fondo
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-        texto=Fuente.render("¡YOU WIN!",0,(255,0,0))
-        ven.blit(texto,(230,230))
-        pygame.display.update()
+main()
+    
+pygame.init()
+ven= pygame.display.set_mode((800,600))
+pygame.display.set_caption("Juego terminado")
+Fuente= pygame.font.SysFont("Arial", 80)
+while True:
+     ven.fill((255, 255, 255))  #color de fondo
+     for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+        pygame.quit()
+        sys.exit()
+     texto=Fuente.render("¡YOU WIN!",0,(255,0,0))
+     ven.blit(texto,(230,230))
+     pygame.display.update()
 
 
