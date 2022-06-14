@@ -1,7 +1,6 @@
 import pygame, os, turtle, sys, time
 
 pygame.init() #Iniciamos pygame
-CONT_PASOS = 0
 tiempo = time.time()
 
 def collide_DOWN(jugador): #Funcion para detectar colisiones con los bordes inferiores
@@ -75,7 +74,7 @@ def movimiento_jugador(keys_pressed, jugador): #Funcion para el movimiento del j
             jugador.y += vel
             CONT_PASOS += 1
 
-def WIN_IMAGE():    
+def WIN_IMAGE(): #Funcion para la imagen de ganado
     pygame.init()
     ven = pygame.display.set_mode((800,600))
     pygame.display.set_caption("Juego terminado")
@@ -90,7 +89,7 @@ def WIN_IMAGE():
             ven.blit(texto,(230,230))
             pygame.display.update()
 
-def LOSE_IMAGE():
+def LOSE_IMAGE(): #Funcion para la imagen de perdida
     pygame.init()
     ven = pygame.display.set_mode((800,600))
     pygame.display.set_caption("Juego terminado")
@@ -118,7 +117,7 @@ def mov_imagenes(jugador): #Funcion para las imagenes en el juego
     pygame.display.update()
 
 
-def main():
+def main(): #Funcion principal del juego
     global tiempo_final
     jugador = pygame.Rect(ancho/2, alto/2, largo_jugador, alto_jugador) #Creacion del jugador
     clock = pygame.time.Clock()
@@ -131,8 +130,8 @@ def main():
             if event.type == pygame.QUIT: #Se terminara el bucle si se cierra la ventana.
 
                 run = False
-        keys_pressed = pygame.key.get_pressed()
-        tiempo_final = tiempo_transcurrido()
+        keys_pressed = pygame.key.get_pressed() #Se obtienen las teclas presionadas
+        tiempo_final = tiempo_transcurrido() 
         movimiento_jugador(keys_pressed, jugador) #Se llama a la funcion para el movimiento del jugador
         mov_imagenes(jugador) #Se llama a la funcion para las imagenes en el juego
         WIN_GAME(jugador) #Se llama a la funcion para ver si gana
@@ -147,24 +146,27 @@ negro = (0, 0, 0)
 rojo = (255, 0, 0)
 azul = (0, 0, 255)
 
-#CONSTANTES6
+#CONSTANTES
 vel = 1 #Velocidad del jugador
 FPS = 60 #Fotogramas por segundo que tendra el programa
 ancho, alto = 800, 600 #Dimensiones de la ventana del juego
 tiempo_limite = 50 #Tiempo limite para ganar
+
+#CONTADOR
+CONT_PASOS = 0 #Contador de pasos
 
 #LETRA PASOS
 pasos_fuente = pygame.font.SysFont('comicsans', 40) #Fuente para los pasos
 tiempo_fuente = pygame.font.SysFont('comicsans', 40) #Fuente para el tiempo
 
 #PANTALLA
-ventana = pygame.display.set_mode((ancho, alto+50))
+ventana = pygame.display.set_mode((ancho, alto+50)) #Creacion de la ventana del juego
 pygame.display.set_caption("Laberinto del fauno") #NOMBRE DEL JUEGO
 
 fondo = pygame.image.load("laberinto.svg") #Cargamos la imagen que representara al jugador
-fondo = pygame.transform.rotate(pygame.transform.scale(fondo, (ancho, alto)), 180)
+fondo = pygame.transform.rotate(pygame.transform.scale(fondo, (ancho, alto)), 180) # Rotamos y escalamos la imagen
 
 largo_jugador, alto_jugador = 20, 20 #Dimensiones del jugador
-imagen_jugador = pygame.transform.scale(pygame.image.load("circ_rojo.png"), (largo_jugador, alto_jugador))
+imagen_jugador = pygame.transform.scale(pygame.image.load("circ_rojo.png"), (largo_jugador, alto_jugador)) #Cargamos la imagen del jugador y la escalamos
 
 main()
