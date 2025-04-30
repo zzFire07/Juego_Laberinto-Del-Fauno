@@ -6,7 +6,7 @@ tiempo = time.time()
 def collide_DOWN(jugador): #Funcion para detectar colisiones con los bordes inferiores
     choque = False
     for i in range (1, largo_jugador):
-        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y + 20))
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y + alto_jugador + vel - 1))
         if pixeles_fondo == (0, 0, 0, 255):
             choque = True
     return choque
@@ -14,7 +14,7 @@ def collide_DOWN(jugador): #Funcion para detectar colisiones con los bordes infe
 def collide_UP(jugador): #Funcion para detectar colisiones con los bordes superiores
     choque = False
     for i in range (1, largo_jugador):
-        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y))
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + i, jugador.y - vel + 1))
         if pixeles_fondo == (0, 0, 0, 255):
             choque = True
     return choque
@@ -22,7 +22,7 @@ def collide_UP(jugador): #Funcion para detectar colisiones con los bordes superi
 def collide_RIGHT(jugador): #Funcion para detectar colisiones con los bordes derechos
     choque = False
     for i in range (1, largo_jugador):
-        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + 20, jugador.y + i))
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x + largo_jugador + vel - 1, jugador.y + i))
         if pixeles_fondo == (0, 0, 0, 255):
             choque = True
     return choque
@@ -30,7 +30,7 @@ def collide_RIGHT(jugador): #Funcion para detectar colisiones con los bordes der
 def collide_LEFT(jugador): #Funcion para detectar colisiones con los bordes izquierdos
     choque = False
     for i in range (1, largo_jugador):
-        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x, jugador.y + i))
+        pixeles_fondo = pygame.Surface.get_at(fondo, (jugador.x - vel + 1, jugador.y + i))
         if pixeles_fondo == (0, 0, 0, 255):
             choque = True
     return choque
@@ -100,6 +100,9 @@ def LOSE_IMAGE(): #Funcion para la imagen de perdida
             if event.type==pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+                #SI SE APRETA R SE REINICIA EL JUEGO
+            elif event.type == pygame.K_r:
+                main()
             texto=Fuente.render("¡YOU LOSE!",0,(rojo))
             ven.blit(texto,(230,230))
             pygame.display.update()
@@ -163,10 +166,10 @@ tiempo_fuente = pygame.font.SysFont('comicsans', 40) #Fuente para el tiempo
 ventana = pygame.display.set_mode((ancho, alto+50)) #Creacion de la ventana del juego
 pygame.display.set_caption("Laberinto del fauno") #NOMBRE DEL JUEGO
 
-fondo = pygame.image.load("laberinto.svg") #Cargamos la imagen que representara al jugador
+fondo = pygame.image.load("assets/laberinto.svg") #Cargamos la imagen que representara al jugador
 fondo = pygame.transform.rotate(pygame.transform.scale(fondo, (ancho, alto)), 180) # Rotamos y escalamos la imagen
 
 largo_jugador, alto_jugador = 20, 20 #Dimensiones del jugador
-imagen_jugador = pygame.transform.scale(pygame.image.load("circ_rojo.png"), (largo_jugador, alto_jugador)) #Cargamos la imagen del jugador y la escalamos
+imagen_jugador = pygame.transform.scale(pygame.image.load("assets/circ_rojo.png"), (largo_jugador, alto_jugador)) #Cargamos la imagen del jugador y la escalamos
 
 main()
