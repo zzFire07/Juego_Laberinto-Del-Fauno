@@ -9,35 +9,35 @@ class Jugador(pygame.Rect):
 
     def acciones(self, keys_pressed, fondo):
         moved = False
-
+        
         if (keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT]):
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_left(fondo):
                     break
                 else:
                     self.x -= 1
-            moved = True
+                    moved = True
         if (keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT]):
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_right(fondo):
                     break
                 else:
                     self.x += 1
-            moved = True
+                    moved = True
         if (keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]):
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_up(fondo):
                     break
                 else:
                     self.y -= 1
-            moved = True
+                    moved = True
         if (keys_pressed[pygame.K_s] or keys_pressed[pygame.K_DOWN]):
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_down(fondo):
                     break
                 else:
                     self.y += 1
-            moved = True
+                    moved = True
 
         if moved:
             self.pasos += 1 # Incrementa el contador de pasos del jugador

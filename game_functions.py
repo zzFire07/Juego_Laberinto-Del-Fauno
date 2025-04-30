@@ -1,6 +1,6 @@
 import pygame
 import time
-from config import BLANCO, ROJO, AZUL, ANCHO_VENTANA, ALTO_VENTANA, TIEMPO_LIMITE
+from config import BLANCO, ROJO, AZULSITO, ANCHO_VENTANA, ALTO_VENTANA, TIEMPO_LIMITE
 
 TIEMPO_INICIO = time.time()
 
