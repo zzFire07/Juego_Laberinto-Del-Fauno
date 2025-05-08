@@ -4,13 +4,20 @@ from config import VELOCIDAD_JUGADOR, LARGO_JUGADOR, ALTO_JUGADOR
 class Jugador(pygame.Rect):
     def __init__(self, x, y):
         super().__init__(x, y, LARGO_JUGADOR, ALTO_JUGADOR)
-        self.imagen = pygame.transform.scale(pygame.image.load("assets/circ_rojo.png"), (LARGO_JUGADOR, ALTO_JUGADOR))
+        self.imagen = pygame.transform.scale(pygame.image.load("assets/characterr.png"), (LARGO_JUGADOR, ALTO_JUGADOR))
         self.pasos = 0  # El contador de pasos ahora es un atributo del jugador
+        self.imagen_arriba = self.imagen  # Imagen original
+        self.imagen_abajo = pygame.transform.flip(self.imagen, False, True)  # Voltea la imagen hacia abajo
+        self.imagen_derecha = pygame.transform.rotate(self.imagen, -90)  # Voltea la imagen hacia la derecha 90 grados
+        self.imagen_izquierda = pygame.transform.rotate(self.imagen, 90)  # Voltea la imagen hacia la izquierda -90 grados
+        self.direccion = "arriba"  # Dirección inicial
 
     def acciones(self, keys_pressed, fondo):
         moved = False
-        
+
         if (keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT]):
+            self.imagen = self.imagen_izquierda  # Voltea la imagen a la izquierda
+            self.direccion = "izquierda"  # Actualiza la dirección
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_left(fondo):
                     break
@@ -18,6 +25,8 @@ class Jugador(pygame.Rect):
                     self.x -= 1
                     moved = True
         if (keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT]):
+            self.imagen = self.imagen_derecha  # Voltea la imagen a la derecha
+            self.direccion = "derecha"  # Actualiza la dirección
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_right(fondo):
                     break
@@ -25,6 +34,8 @@ class Jugador(pygame.Rect):
                     self.x += 1
                     moved = True
         if (keys_pressed[pygame.K_w] or keys_pressed[pygame.K_UP]):
+            self.imagen = self.imagen_arriba
+            self.direccion = "arriba"
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_up(fondo):
                     break
@@ -32,6 +43,8 @@ class Jugador(pygame.Rect):
                     self.y -= 1
                     moved = True
         if (keys_pressed[pygame.K_s] or keys_pressed[pygame.K_DOWN]):
+            self.imagen = self.imagen_abajo
+            self.direccion = "abajo"
             for i in range(1, VELOCIDAD_JUGADOR):
                 if self.collide_down(fondo):
                     break

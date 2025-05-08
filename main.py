@@ -1,6 +1,6 @@
 import pygame
 from player import Jugador
-from game_functions import actualizar_pantalla, verificar_ganar, verificar_perder, actualizar_tiempo
+from game_functions import actualizar_pantalla, verificar_ganar, verificar_perder, actualizar_tiempo, reiniciar_tiempo
 from ui import mostrar_mensaje
 from config import ANCHO_VENTANA, ALTO_VENTANA, FPS, ROJO, AZULSITO
 import time
@@ -16,9 +16,8 @@ pasos_fuente = pygame.font.SysFont('comicsans', 40)
 tiempo_fuente = pygame.font.SysFont('comicsans', 40)
 
 def main():
-    global CONTADOR_PASOS, TIEMPO_INICIO
+    global CONTADOR_PASOS
     CONTADOR_PASOS = 0
-    TIEMPO_INICIO = time.time()
     jugador = Jugador(ANCHO_VENTANA // 2 - 10, ALTO_VENTANA // 2 - 10)
     clock = pygame.time.Clock()
     run = True
@@ -36,15 +35,13 @@ def main():
 
         if verificar_ganar(jugador):
             if mostrar_mensaje(ventana, "¡YOU WIN!", AZULSITO):
-                CONTADOR_PASOS = 0
-                TIEMPO_INICIO = time.time()
+                reiniciar_tiempo()
                 main() # Reiniciar el juego si mostrar_mensaje devuelve True
             else:
                 run = False # Si se cierra la ventana de perder
         elif verificar_perder(tiempo_transcurrido):
             if mostrar_mensaje(ventana, "¡YOU LOSE!", ROJO):
-                CONTADOR_PASOS = 0
-                TIEMPO_INICIO = time.time()
+                reiniciar_tiempo()
                 main() # Reiniciar el juego si mostrar_mensaje devuelve True
             else:
                 run = False # Si se cierra la ventana de perder

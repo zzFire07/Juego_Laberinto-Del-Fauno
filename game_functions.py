@@ -2,11 +2,18 @@ import pygame
 import time
 from config import BLANCO, ROJO, AZULSITO, ANCHO_VENTANA, ALTO_VENTANA, TIEMPO_LIMITE
 
-TIEMPO_INICIO = time.time()
+global tiempo_inicio
+tiempo_inicio = time.time()
+
+
 
 def actualizar_tiempo():
     tiempo_actual = time.time()
-    return tiempo_actual - TIEMPO_INICIO
+    return tiempo_actual - tiempo_inicio
+
+def reiniciar_tiempo():
+    global tiempo_inicio
+    tiempo_inicio = time.time()
 
 def verificar_ganar(jugador):
     return jugador.y > ALTO_VENTANA - jugador.height - 4
