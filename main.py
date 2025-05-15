@@ -2,14 +2,14 @@ import pygame
 from player import Jugador
 from game_functions import actualizar_pantalla, verificar_ganar, verificar_perder, actualizar_tiempo, reiniciar_tiempo
 from ui import mostrar_finjuego, mostrar_menu_principal, mostrar_configuracion
-from config import ANCHO_VENTANA, ALTO_VENTANA, FPS, ROJO, AZULSITO
+from config import ANCHO_VENTANA, ALTO_VENTANA, FPS, ROJO, AZULSITO, resource_path
 import time
 
 pygame.init()
 ventana = pygame.display.set_mode((ANCHO_VENTANA, ALTO_VENTANA + 50))
 pygame.display.set_caption("Laberinto del fauno")
 
-fondo = pygame.image.load("assets/laberinto.svg")
+fondo = pygame.image.load(resource_path("assets/laberinto.svg"))
 fondo = pygame.transform.rotate(pygame.transform.scale(fondo, (ALTO_VENTANA, ALTO_VENTANA)), 180)
 
 pasos_fuente = pygame.font.SysFont('comicsans', 40)

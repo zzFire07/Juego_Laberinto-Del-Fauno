@@ -1,10 +1,10 @@
 import pygame
-from config import VELOCIDAD_JUGADOR, LARGO_JUGADOR, ALTO_JUGADOR
+from config import VELOCIDAD_JUGADOR, LARGO_JUGADOR, ALTO_JUGADOR, resource_path
 
 class Jugador(pygame.Rect):
     def __init__(self, x, y):
         super().__init__(x, y, LARGO_JUGADOR, ALTO_JUGADOR)
-        self.imagen = pygame.transform.scale(pygame.image.load("assets/characterr.png"), (LARGO_JUGADOR, ALTO_JUGADOR))
+        self.imagen = pygame.transform.scale(pygame.image.load(resource_path("assets/characterr.png")), (LARGO_JUGADOR, ALTO_JUGADOR))
         self.pasos = 0  # El contador de pasos ahora es un atributo del jugador
         self.imagen_arriba = self.imagen  # Imagen original
         self.imagen_abajo = pygame.transform.flip(self.imagen, False, True)  # Voltea la imagen hacia abajo

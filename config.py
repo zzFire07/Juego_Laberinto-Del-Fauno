@@ -1,3 +1,6 @@
+import os
+import sys
+
 # COLORES
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
@@ -20,3 +23,13 @@ TIEMPO_LIMITE = 30
 # DIMENSIONES DEL JUGADOR
 LARGO_JUGADOR = 22
 ALTO_JUGADOR = 22
+
+
+def resource_path(relative_path):
+    """Devuelve la ruta absoluta a un recurso, funciona tanto en desarrollo como en el .exe."""
+    try:
+        base_path = sys._MEIPASS  # Ruta temporal creada por PyInstaller
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
